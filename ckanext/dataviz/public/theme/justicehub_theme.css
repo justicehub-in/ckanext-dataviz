@@ -1,0 +1,6 @@
+rect.bar-rect { fill: #189ad3; }
+
+rect.bar-rect:hover {
+  fill: #107dac;
+  transition: all .2s;
+}
