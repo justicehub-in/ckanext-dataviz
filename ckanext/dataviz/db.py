@@ -39,7 +39,8 @@ class DataStoreQuery(Query):
         datastore_search = toolkit.get_action(u'datastore_search')
         response = datastore_search(None, {
             u"resource_id": self.resource_id,
-            u"fields": self.fields
+            u"fields": self.fields,
+            u"limit": 10**6
         })
 
         return response['records']
