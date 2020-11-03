@@ -2,6 +2,10 @@ this.ckan.module('dataviz_view', function (jQuery) {
   return {
     initialize: function() {
     var x_axis = this.options.resourceView.x_axis;
+    var y_axis = "Count";
+    var x_axis_title = this.options.resourceView.x_axis_title ? this.options.resourceView.x_axis_title : x_axis;
+    var y_axis_title = this.options.resourceView.y_axis_title ? this.options.resourceView.y_axis_title : y_axis;
+
     $.post( "/dataviz_view/ajax/" + this.options.resourceView.id,
     { fields: x_axis}).done(function (response) {
 
@@ -32,7 +36,7 @@ const svg = d3.select('.canvas')
             "translate(" + ((graphWidth/2) - 200) + " ," +
                            (graphHeight + margin.top + 20) + ")")
       .style("text-anchor", "middle")
-      .text(x_axis);
+      .text(x_axis_title);
 
 
       graph.append("text")
@@ -41,7 +45,7 @@ const svg = d3.select('.canvas')
       .attr("x",0 - (graphHeight / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
-      .text("Count");
+      .text(y_axis_title);
 
   const y = d3.scaleLinear()
     .domain([0, d3.max(data, d => Object.values(d)[0])])

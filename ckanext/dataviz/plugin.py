@@ -77,6 +77,8 @@ class DataVizBaseView(p.SingletonPlugin):
             u'schema': {
                 u'responsive': [default(False), boolean_validator],
                 u'x_axis': [not_empty],
+                u'x_axis_title': [default('')],
+                u'y_axis_title': [default('')]
             }
         }
 
