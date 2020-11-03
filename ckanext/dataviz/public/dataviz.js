@@ -5,22 +5,23 @@ this.ckan.module('dataviz_view', function (jQuery) {
     var y_axis = "Count";
     var x_axis_title = this.options.resourceView.x_axis_title ? this.options.resourceView.x_axis_title : x_axis;
     var y_axis_title = this.options.resourceView.y_axis_title ? this.options.resourceView.y_axis_title : y_axis;
+    var chart_title = this.options.resourceView.chart_title ? this.options.resourceView.chart_title : "";
 
     $.post( "/dataviz_view/ajax/" + this.options.resourceView.id,
     { fields: x_axis}).done(function (response) {
 
     var data = JSON.parse(response)["value"];
 
-    const width = 1000;
+    const width = window.screen.width;
     const height = 600;
-    const margin = {'top': 20, 'right': 20, 'bottom': 100, 'left': 100};
+    const margin = {'top': 40, 'right': 20, 'bottom': 100, 'left': 100};
     const graphWidth = width - margin.left - margin.right;
     const graphHeight = height - margin.top - margin.bottom;
 
 
 const svg = d3.select('.canvas')
   .append('svg')
-  .attr('width', width)
+  .attr('width', "100%")
   .attr('height', height);
   const graph = svg.append('g')
   .attr('width', graphWidth)
@@ -33,7 +34,7 @@ const svg = d3.select('.canvas')
 
     graph.append("text")
       .attr("transform",
-            "translate(" + ((graphWidth/2) - 200) + " ," +
+            "translate(" + ((graphWidth/4)) + " ," +
                            (graphHeight + margin.top + 20) + ")")
       .style("text-anchor", "middle")
       .text(x_axis_title);
@@ -47,13 +48,21 @@ const svg = d3.select('.canvas')
       .style("text-anchor", "middle")
       .text(y_axis_title);
 
+      graph.append("text")
+        .attr("x", (graphWidth / 4))
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("text-decoration", "underline")
+        .text(chart_title);
+
   const y = d3.scaleLinear()
     .domain([0, d3.max(data, d => Object.values(d)[0])])
     .range([graphHeight, 0]);
 
   const x = d3.scaleBand()
     .domain(data.map(item => Object.keys(item)[0]))
-    .range([0, 500])
+    .range([0, width/2])
     .paddingInner(0.2)
     .paddingOuter(0.2);  const rects = graph.selectAll('rect')
     .data(data);  rects.attr('width', x.bandwidth)
