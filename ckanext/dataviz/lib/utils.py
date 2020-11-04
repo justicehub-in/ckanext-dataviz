@@ -20,6 +20,7 @@ def get_bar_chart(records, field):
     is_datetype = is_date(records[0][field])
 
     # TODO: Allow users to decide operations on datetime fields
-    data_counter = dict(Counter([str(f[field]) if not is_datetype
-                                 else str(parse(f[field]).year) for f in records]))
-    return [{key: data_counter[key]} for key in data_counter]
+    # TODO: Optimize + Caching
+    data_counter = dict(Counter([f[field] if not is_datetype
+                                 else parse(f[field]).year for f in records]))
+    return sorted([{key: data_counter[key]} for key in data_counter])
