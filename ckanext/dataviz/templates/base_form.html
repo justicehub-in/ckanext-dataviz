@@ -2,12 +2,23 @@
 
 {% block form %}
 
+{% resource 'dataviz/main' %}
+
+{{ form.select('chart_type',  label=_('Chart Type'),  options=[{'value': 'bar', 'text': 'Bar'}, {'value': 'bignumber', 'text': 'Big Number'}], selected=resource_view['chart_type'], is_required=true, id='chart_type') }}
+
+{% set chart_type = resource_view['chart_type'] or "bar" %}
+
+<div id="bar" class="{{ 'hidden' if chart_type != 'bar' else '' }}">
 {{ form.input('chart_title', label=_('Chart title'), placeholder=_('Optional'), value=resource_view['chart_title'], error=error, classes=[]) }}
 {{ form.input('x_axis_title', label=_('X Axis title'), placeholder=_('Optional'), value=resource_view['x_axis_title'], error=error, classes=[]) }}
 {{ form.input('y_axis_title', label=_('Y Axis title'), placeholder=_('Optional'), value=resource_view['y_axis_title'], error=error, classes=[]) }}
-    {{
-        form.select('x_axis', label=_('X Axis'), options=fields,
-            selected=resource_view['x_axis'], is_required=true)
-    }}
+{{ form.select('x_axis', label=_('X Axis'), options=fields, selected=resource_view['x_axis'], is_required=true)}}
+</div>
+
+<div id="bignumber" class="{{ 'hidden' if chart_type != 'bignumber' else '' }}">
+{{ form.select('aggregate', label=_('Aggregate'), options=[{'value': 'Sum', 'text': 'Sum'}, {'value': 'Count', 'text': 'Count'}], selected=resource_view['aggregate'], is_required=true)}}
+{{ form.select('column', label=_('Column'), options=fields, selected=resource_view['column'], is_required=true)}}
+</div>
+
 
 {% endblock %}

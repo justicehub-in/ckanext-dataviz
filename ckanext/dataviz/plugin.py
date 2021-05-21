@@ -76,10 +76,13 @@ class DataVizBaseView(p.SingletonPlugin):
             u'default_title': p.toolkit._(u'Graph'),
             u'schema': {
                 u'responsive': [default(False), boolean_validator],
+		u'chart_type': [not_empty],
                 u'x_axis': [not_empty],
                 u'chart_title': [default('')],
                 u'x_axis_title': [default('')],
-                u'y_axis_title': [default('')]
+                u'y_axis_title': [default('')],
+                u'aggregate': [not_empty],
+                u'column': [not_empty],
             }
         }
 

@@ -1,5 +1,6 @@
 from collections import Counter
 from dateutil.parser import parse
+import json
 
 
 def is_date(string, fuzzy=False):
@@ -24,3 +25,18 @@ def get_bar_chart(records, field):
     data_counter = dict(Counter([f[field] if not is_datetype
                                  else parse(f[field]).year for f in records]))
     return sorted([{key: data_counter[key]} for key in data_counter])
+
+
+def get_big_number(records, field, aggregate):
+ 
+    if aggregate == "Count":
+    	result = len(records)
+    if aggregate == "Sum":
+    	result = sum([float(f[field]) for f in records])
+    if aggregate == "Min":
+    	result = min([f[field] for f in records])
+    if aggregate == "Max":
+    	result = max([f[field] for f in records])
+
+    print(result)
+    return result
