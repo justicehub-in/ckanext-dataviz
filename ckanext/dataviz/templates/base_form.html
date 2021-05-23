@@ -16,7 +16,7 @@
 </div>
 
 <div id="bignumber" class="{{ 'hidden' if chart_type != 'bignumber' else '' }}">
-{{ form.select('aggregate', label=_('Aggregate'), options=[{'value': 'Sum', 'text': 'Sum'}, {'value': 'Count', 'text': 'Count'}], selected=resource_view['aggregate'], is_required=true)}}
+{{ form.select('aggregate', label=_('Aggregate'), options=[{'value': 'Sum', 'text': 'Sum'}, {'value': 'Count', 'text': 'Count'}, {'value': 'Min', 'text': 'Min'}, {'value': 'Max', 'text': 'Max'}], selected=resource_view['aggregate'], is_required=true)}}
 {{ form.select('column', label=_('Column'), options=fields, selected=resource_view['column'], is_required=true)}}
 </div>
 
