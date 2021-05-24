@@ -69,7 +69,7 @@ class DataVizBaseView(p.SingletonPlugin):
     def info(self):
         return {
             u'name': u'dataviz_view',
-            u'title': u'Bar Chart',
+            u'title': u'Chart Builder',
             u'filterable': True,
             u'icon': u'bar-chart',
             u'requires_datastore': True,
