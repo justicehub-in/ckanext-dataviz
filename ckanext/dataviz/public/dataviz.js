@@ -33,7 +33,7 @@ this.ckan.module('dataviz_view', function (jQuery) {
           console.log("test");
           console.log(chart_type);
 	  if (chart_type == "bignumber"){
-		$('.canvas').append(data);
+		$('.canvas').append("<h1 class='big-number-view'>" + data+ "</h1>");
 
 	  }
 	  if (chart_type == "bar"){

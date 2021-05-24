@@ -4,3 +4,10 @@ rect.bar-rect:hover {
   fill: #107dac;
   transition: all .2s;
 }
+
+.big-number-view{
+  font-size: 54px;
+  font-weight: 700;
+  color: #1d751e;
+  text-align: right;
+}
